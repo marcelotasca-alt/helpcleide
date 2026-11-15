@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Help Cleide, serviço de faxinas para residências, escritórios e comércios em Niterói, Icaraí, Leblon, Copacabana e Zona Sul do Rio. Orçamento e agendamento pelo WhatsApp.">
+<title>Help Cleide | Serviço de Faxinas</title>
+<style>
+:root {
+  --navy: #1d2f6b;
+  --navy-dark: #142252;
+  --pink: #e8237a;
+  --pink-dark: #c01462;
+  --yellow: #f7c523;
+  --sky: #eaf4ff;
+  --bg: #f7fbff;
+  --surface: #ffffff;
+  --text: #1d2f6b;
+  --muted: #5b6a8f;
+  --border: #d9e6f7;
+  --radius: 18px;
+  color-scheme: light;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+a { color: inherit; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; }
+section { padding: 4rem 0; }
+.eyebrow { color: var(--pink); font-weight: 700; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 .5rem; }
+h1, h2, h3 { line-height: 1.2; margin: 0; }
+h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: .6rem; }
+.lead { color: var(--muted); max-width: 640px; margin: 0 0 2rem; }
+
+/* cabeçalho */
+header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); border-bottom: 1px solid var(--border); }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 1rem; }
+.logo { display: flex; align-items: center; gap: .5rem; text-decoration: none; }
+.logo .house { width: 34px; height: 34px; }
+.logo .word { font-weight: 800; font-size: 1.2rem; color: var(--navy); }
+.logo .word em { color: var(--pink); font-style: normal; font-family: "Brush Script MT", "Segoe Script", cursive; font-size: 1.5rem; font-weight: 700; margin-left: .15rem; }
+nav.menu { display: flex; gap: 1.25rem; font-size: .95rem; }
+nav.menu a { text-decoration: none; color: var(--muted); font-weight: 600; }
+nav.menu a:hover { color: var(--pink); }
+@media (max-width: 800px) { nav.menu { display: none; } }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; background: var(--pink); color: #fff; text-decoration: none; padding: .9rem 1.5rem; border-radius: 999px; font-weight: 700; border: 0; cursor: pointer; font-size: 1rem; box-shadow: 0 10px 22px rgba(232,35,122,.28); transition: transform .2s ease, background .2s ease; font-family: inherit; }
+.btn:hover { background: var(--pink-dark); transform: translateY(-2px); }
+.btn.ghost { background: transparent; color: var(--navy); border: 2px solid var(--navy); box-shadow: none; }
+.btn.ghost:hover { background: var(--navy); color: #fff; }
+.btn.small { padding: .55rem 1.1rem; font-size: .9rem; box-shadow: none; }
+.btn.light { background: #fff; color: var(--pink-dark); }
+.btn.light:hover { background: var(--yellow); color: var(--navy); }
+
+/* destaque */
+.hero { padding: 3rem 0 3.5rem; background: radial-gradient(circle at 85% 20%, #ffffff 0, var(--sky) 60%); }
+.hero .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+@media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; } }
+.ribbon { display: inline-block; background: var(--yellow); color: var(--navy); font-weight: 800; padding: .45rem 1.1rem; border-radius: 6px; transform: rotate(-2deg); margin-bottom: 1rem; box-shadow: 0 6px 14px rgba(29,47,107,.15); }
+.hero h1 { font-size: clamp(2.1rem, 5.5vw, 3.4rem); margin-bottom: 1rem; color: var(--navy); }
+.hero h1 span { color: var(--pink); }
+.hero p.sub { color: var(--muted); font-size: 1.1rem; margin: 0 0 1.75rem; max-width: 520px; }
+.hero .actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.checks { list-style: none; padding: 0; margin: 1.75rem 0 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+.checks li { background: var(--surface); border: 2px solid var(--navy); color: var(--navy); padding: .35rem .9rem; border-radius: 999px; font-weight: 700; font-size: .92rem; }
+
+.photo-wrap { position: relative; max-width: 460px; margin: 0 auto; width: 100%; }
+.photo-frame { position: relative; border-radius: 28px; overflow: hidden; background: #fff; aspect-ratio: 1 / 1; box-shadow: 0 24px 50px rgba(29,47,107,.22); border: 6px solid #fff; animation: float 6s ease-in-out infinite; }
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: 40% 18%; display: block; }
+.photo-frame::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.6) 50%, transparent 60%); transform: translateX(-100%); animation: sweep 4.5s ease-in-out infinite; pointer-events: none; }
+.sparkle { position: absolute; width: 34px; height: 34px; background: #fff; clip-path: polygon(50% 0%, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0% 50%, 38% 38%); animation: twinkle 3s ease-in-out infinite; }
+.sparkle.blue { background: #2b6cf0; }
+.sp1 { top: -6px; left: 8%; }
+.sp2 { top: 22%; right: -10px; width: 26px; height: 26px; animation-delay: 1s; }
+.sp3 { bottom: 16%; left: -8px; width: 22px; height: 22px; animation-delay: 2s; }
+.wa-quick { display: flex; width: fit-content; margin: 1.5rem auto 0; position: relative; z-index: 2; }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes twinkle { 0%,100% { opacity: .35; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.1); } }
+@keyframes sweep { 0%, 60% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+@keyframes shine { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.hero h1, .hero p.sub, .hero .actions, .ribbon { animation: rise .8s ease both; }
+.hero p.sub { animation-delay: .15s; }
+.hero .actions { animation-delay: .3s; }
+.logo .word em, .hero h1 span, .cta h2 span { background-image: linear-gradient(100deg, var(--pink) 35%, #ffd6ea 50%, var(--pink) 65%); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 3.5s linear infinite; }
+.cta h2 span { background-image: linear-gradient(100deg, #f7c523 35%, #fff6cc 50%, #f7c523 65%); }
+
+/* faixa */
+.ticker { overflow: hidden; background: var(--pink); color: #fff; padding: .95rem 0; white-space: nowrap; }
+.ticker-track { display: inline-flex; animation: ticker 26s linear infinite; font-weight: 700; }
+.ticker-track span { padding-right: 2.5rem; }
+.ticker-track span::after { content: "\2022"; margin-left: 2.5rem; opacity: .7; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+/* cards */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.1rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.6rem; border-top: 5px solid var(--pink); transition: transform .25s ease, box-shadow .25s ease; }
+.card:nth-child(2) { border-top-color: var(--navy); }
+.card:nth-child(3) { border-top-color: var(--yellow); }
+.card h3 { font-size: 1.15rem; margin-bottom: .5rem; color: var(--navy); }
+.card p { color: var(--muted); margin: 0 0 .75rem; font-size: .97rem; }
+.card ul { margin: 0; padding-left: 1.1rem; color: var(--muted); font-size: .95rem; }
+.card .icon { width: 44px; height: 44px; border-radius: 12px; background: var(--sky); display: grid; place-items: center; margin-bottom: 1rem; color: var(--navy); font-size: 1.3rem; font-weight: 800; }
+
+.soft { background: var(--sky); }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+.step { position: relative; padding-top: 3.2rem; }
+.step .n { position: absolute; top: 0; left: 0; width: 40px; height: 40px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-weight: 800; }
+.step:nth-child(2) .n { background: var(--pink); }
+.step:nth-child(3) .n { background: var(--yellow); color: var(--navy); }
+.step h3 { font-size: 1.05rem; margin-bottom: .35rem; color: var(--navy); }
+.step p { color: var(--muted); margin: 0; font-size: .95rem; }
+
+.areas { display: flex; flex-wrap: wrap; gap: .6rem; }
+.areas span { background: var(--surface); border: 2px solid var(--navy); color: var(--navy); padding: .45rem 1rem; border-radius: 999px; font-weight: 600; font-size: .95rem; }
+
+/* formulário único */
+.booking { display: grid; grid-template-columns: 1fr 1.25fr; gap: 2.5rem; align-items: start; }
+@media (max-width: 860px) { .booking { grid-template-columns: 1fr; } }
+form.q { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.6rem; display: grid; gap: 1rem; box-shadow: 0 14px 30px rgba(29,47,107,.08); }
+form.q label { display: grid; gap: .35rem; font-size: .92rem; font-weight: 700; color: var(--navy); }
+form.q input, form.q select, form.q textarea { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: .75rem .9rem; width: 100%; }
+form.q input:focus, form.q select:focus, form.q textarea:focus { outline: 2px solid var(--pink); outline-offset: 1px; }
+form.q .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 520px) { form.q .row { grid-template-columns: 1fr; } }
+.cal { border: 1px solid var(--border); border-radius: 12px; padding: .75rem; background: var(--bg); }
+.cal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: .5rem; color: var(--navy); font-size: .95rem; text-transform: capitalize; }
+.cal-nav { background: var(--sky); border: 0; color: var(--navy); width: 34px; height: 34px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; }
+.cal-dow { font-size: .75rem; color: var(--muted); font-weight: 700; padding: .25rem 0; }
+.cal-day { border: 0; background: transparent; padding: .5rem 0; border-radius: 8px; font: inherit; font-size: .9rem; color: var(--navy); cursor: pointer; }
+.cal-day:hover { background: var(--sky); }
+.cal-day.on { background: var(--pink); color: #fff; font-weight: 700; }
+.cal-day.off { color: #b9c3d6; cursor: not-allowed; text-decoration: line-through; }
+.cal-day.off:hover { background: transparent; }
+.hint { color: var(--muted); font-size: .88rem; margin: 0; }
+#wa-envio { display: none; text-align: center; background: #25d366; color: #fff; }
+#wa-envio:hover { background: #1ebe5b; }
+
+details { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1rem 1.25rem; margin-bottom: .75rem; }
+summary { cursor: pointer; font-weight: 700; color: var(--navy); }
+details p { color: var(--muted); margin: .6rem 0 0; }
+
+.cta { background: var(--navy); color: #fff; border-radius: 26px; padding: 3rem 1.5rem; text-align: center; }
+.cta h2 { color: #fff; }
+.cta p { opacity: .92; margin: 0 0 1.5rem; }
+
+footer { background: var(--navy-dark); color: #d6e0f5; padding: 2.5rem 0; font-size: .93rem; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; align-items: center; }
+footer .logo .word { color: #fff; }
+footer .logo .word em { color: var(--yellow); background: none; -webkit-text-fill-color: var(--yellow); animation: none; }
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+.reveal.in.card:hover { transform: translateY(-5px); box-shadow: 0 16px 30px rgba(29,47,107,.14); }
+.cal-day, .btn { -webkit-tap-highlight-color: transparent; }
+@media (prefers-reduced-motion: reduce) {
+  .photo-frame, .photo-frame::after, .sparkle, .ticker-track, .hero h1, .hero p.sub, .hero .actions, .ribbon, .logo .word em, .hero h1 span, .cta h2 span { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Help Cleide, início">
+      <svg class="house" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 20 L20 6 L36 20" fill="none" stroke="#1d2f6b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 18 V34 H31 V18" fill="none" stroke="#1d2f6b" stroke-width="4" stroke-linejoin="round"/><rect x="16" y="12" width="5" height="5" fill="#e8237a"/><rect x="23" y="12" width="5" height="5" fill="#e8237a"/></svg>
+      <span class="word">Help <em>Cleide</em></span>
+    </a>
+    <nav class="menu" aria-label="Principal">
+      <a href="#servicos">Serviços</a>
+      <a href="#como">Como funciona</a>
+      <a href="#padrao">O que inclui</a>
+      <a href="#areas">Áreas</a>
+      <a href="#agendar">Agendar</a>
+      <a href="#faq">Dúvidas</a>
+    </nav>
+    <a class="btn small" href="https://wa.me/5521996737867?text=Ol%C3%A1%2C%20Cleide!" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</header>
+
+<main id="inicio">
+
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <span class="ribbon">Serviço de faxinas</span>
+      <h1>Deixe sua casa <span>sempre limpa</span> e bem cuidada!</h1>
+      <p class="sub">Residências, escritórios e comércios com qualidade, confiança e muito carinho.</p>
+      <div class="actions">
+        <a class="btn" href="#agendar">Agendar ou pedir orçamento</a>
+        <a class="btn ghost" href="#padrao">Ver o que inclui</a>
+      </div>
+      <ul class="checks">
+        <li>Residências</li>
+        <li>Escritórios</li>
+        <li>Comércios</li>
+      </ul>
+    </div>
+    <div class="photo-wrap">
+      <div class="photo-frame">
+        <img src="/_blob/7509892e8e536333f94e229805d42073" alt="Cleide, da Help Cleide Serviço de Faxinas">
+      </div>
+      <span class="sparkle sp1" aria-hidden="true"></span>
+      <span class="sparkle blue sp2" aria-hidden="true"></span>
+      <span class="sparkle sp3" aria-hidden="true"></span>
+      <a class="btn wa-quick" href="https://wa.me/5521996737867?text=Ol%C3%A1%2C%20Cleide!%20Quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">Falar com a Cleide no WhatsApp</a>
+      <p class="hint" style="text-align:center;margin:.6rem 0 0">Ou chame direto: (21) 99673-7867</p>
+    </div>
+  </div>
+</div>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Qualidade</span><span>Confiança</span><span>Muito carinho</span><span>Pontualidade</span><span>Orçamento sem compromisso</span><span>Qualidade</span><span>Confiança</span><span>Muito carinho</span><span>Pontualidade</span><span>Orçamento sem compromisso</span>
+  </div>
+</div>
+
+<section id="servicos">
+  <div class="wrap">
+    <p class="eyebrow">Serviços</p>
+    <h2>Para cada tipo de espaço, um cuidado especial</h2>
+    <p class="lead">Adaptamos o serviço ao seu tamanho, à sua rotina e à sua necessidade.</p>
+    <div class="grid">
+      <article class="card reveal">
+        <div class="icon">R</div>
+        <h3>Residências</h3>
+        <p>Faxina semanal, quinzenal ou completa, com a mesma equipe de confiança.</p>
+        <ul>
+          <li>Faxina semanal ou quinzenal</li>
+          <li>Faxina completa</li>
+          <li>Limpeza pesada</li>
+        </ul>
+      </article>
+      <article class="card reveal">
+        <div class="icon">E</div>
+        <h3>Escritórios</h3>
+        <p>Um ambiente limpo e organizado para a sua equipe e os seus clientes.</p>
+        <ul>
+          <li>Limpeza de salas e banheiros</li>
+          <li>Recepção e áreas de circulação</li>
+          <li>Horários fora do expediente</li>
+        </ul>
+      </article>
+      <article class="card reveal">
+        <div class="icon">C</div>
+        <h3>Comércios</h3>
+        <p>Limpeza que passa boa impressão e mantém o padrão de higiene do seu negócio.</p>
+        <ul>
+          <li>Lojas, consultórios e salões</li>
+          <li>Limpeza de balcões e vitrines</li>
+          <li>Rotina adaptada ao movimento</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="como" class="soft">
+  <div class="wrap">
+    <p class="eyebrow">Como funciona</p>
+    <h2>Simples do começo ao fim</h2>
+    <p class="lead">Você não precisa se preocupar com nada. Cuidamos de tudo desde o primeiro contato.</p>
+    <div class="steps">
+      <div class="step reveal"><span class="n">1</span><h3>Conte sobre o seu espaço</h3><p>Preencha o formulário com o bairro e o serviço desejado.</p></div>
+      <div class="step reveal"><span class="n">2</span><h3>Receba o orçamento</h3><p>Você recebe o valor com a descrição do que está incluído, sem compromisso.</p></div>
+      <div class="step reveal"><span class="n">3</span><h3>Escolha o melhor dia</h3><p>Definimos juntos a data e o horário que combinam com a sua rotina.</p></div>
+      <div class="step reveal"><span class="n">4</span><h3>Aproveite o resultado</h3><p>Nossa equipe chega no horário, faz o serviço com cuidado e confirma com você.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="padrao">
+  <div class="wrap">
+    <p class="eyebrow">O que inclui</p>
+    <h2>Saiba exatamente o que será feito</h2>
+    <p class="lead">Cada área tem uma lista clara de cuidados, para você saber o que esperar.</p>
+    <div class="grid">
+      <article class="card reveal"><h3>Cozinha</h3><p>Bancadas, pia e torneiras, fogão e parte externa dos eletrodomésticos, armários por fora e chão.</p></article>
+      <article class="card reveal"><h3>Banheiros</h3><p>Vaso, pia, box, azulejos, torneiras, espelhos e chão, com atenção à higienização.</p></article>
+      <article class="card reveal"><h3>Quartos e sala</h3><p>Tirada de pó de móveis e superfícies, tomadas, interruptores e chão aspirado ou varrido.</p></article>
+      <article class="card reveal"><h3>Pisos</h3><p>Varrição, aspiração e lavagem adequada ao tipo de piso, sem danificar o acabamento.</p></article>
+      <article class="card reveal"><h3>Área de serviço</h3><p>Tanque, máquina de lavar por fora, piso e lixo recolhido com cuidado.</p></article>
+      <article class="card reveal"><h3>Itens extras</h3><p>Vidros, janelas, geladeira por dentro e armários por dentro, sob consulta no orçamento.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="areas" class="soft">
+  <div class="wrap">
+    <p class="eyebrow">Onde atendemos</p>
+    <h2>Atendimento na região</h2>
+    <p class="lead">Se o seu bairro não estiver na lista, pergunte. Podemos verificar a disponibilidade.</p>
+    <div class="areas">
+      <span>Niterói</span>
+      <span>Icaraí</span>
+      <span>Leblon</span>
+      <span>Copacabana</span>
+      <span>Zona Sul do Rio</span>
+    </div>
+  </div>
+</section>
+
+<section id="agendar">
+  <div class="wrap booking">
+    <div>
+      <p class="eyebrow">Agendamento e orçamento</p>
+      <h2>Escolha o melhor dia e peça o seu orçamento</h2>
+      <p class="lead">Preencha o formulário ao lado. Ao final, um botão verde leva você ao WhatsApp com a sua mensagem pronta para enviar.</p>
+      <p class="hint">Sem compromisso e sem taxa de visita. Você pode escolher a data agora ou deixar em branco.</p>
+    </div>
+    <form class="q" id="form-agenda">
+      <div class="row">
+        <label>Seu nome <input name="nome" required placeholder="Como posso te chamar?"></label>
+        <label>Bairro <input name="bairro" required placeholder="Ex.: Icaraí"></label>
+      </div>
+      <div class="row">
+        <label>Tipo de espaço
+          <select name="espaco" required>
+            <option value="">Escolha uma opção</option>
+            <option>Residência</option>
+            <option>Escritório</option>
+            <option>Comércio</option>
+          </select>
+        </label>
+        <label>Serviço
+          <select name="servico" required>
+            <option value="">Escolha uma opção</option>
+            <option>Faxina semanal ou quinzenal</option>
+            <option>Faxina completa</option>
+            <option>Limpeza pesada</option>
+            <option>Outro (explico na observação)</option>
+          </select>
+        </label>
+      </div>
+      <label>Tamanho do espaço (m²) ou cômodos <input name="tamanho" placeholder="Ex.: 70 m² ou 2 quartos e sala"></label>
+      <div>
+        <span style="font-size:.92rem;font-weight:700;color:var(--navy);display:block;margin-bottom:.35rem">Dia desejado (opcional)</span>
+        <div class="cal" id="cal"></div>
+        <input type="hidden" name="data" id="ag-data">
+      </div>
+      <label>Horário desejado
+        <select name="hora">
+          <option value="">Qualquer horário</option>
+          <option>08:00</option>
+          <option>09:00</option>
+          <option>10:00</option>
+          <option>13:00</option>
+          <option>14:00</option>
+          <option>15:00</option>
+          <option>16:00</option>
+        </select>
+      </label>
+      <label>Observações <textarea name="obs" rows="3" placeholder="Pets, acesso ao imóvel, dia preferido, etc."></textarea></label>
+      <button class="btn" type="submit">Enviar pelo WhatsApp</button>
+      <a class="btn" id="wa-envio" href="#" target="_blank" rel="noopener">Toque aqui para abrir o WhatsApp com a sua mensagem</a>
+    </form>
+  </div>
+</section>
+
+<section id="faq" class="soft">
+  <div class="wrap">
+    <p class="eyebrow">Dúvidas</p>
+    <h2>Perguntas frequentes</h2>
+    <p class="lead">Se a sua dúvida não estiver aqui, é só chamar no WhatsApp.</p>
+    <details><summary>Vocês levam os produtos de limpeza?</summary><p>Sim, levamos os produtos e utensílios. Se preferir usar os seus, é só avisar.</p></details>
+    <details><summary>Preciso estar presente durante o serviço?</summary><p>Não é obrigatório. Basta deixar o acesso combinado.</p></details>
+    <details><summary>Como funciona o valor?</summary><p>O orçamento considera o tamanho do espaço, o tipo de serviço e a frequência. Você confirma o valor antes de qualquer coisa.</p></details>
+    <details><summary>Posso cancelar ou remarcar?</summary><p>Sim. Peço apenas que avise com antecedência para reorganizarmos a agenda com cuidado.</p></details>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta">
+      <h2>Pronta para ter um espaço <span>sempre limpo</span>?</h2>
+      <p>Qualidade, confiança e muito carinho. Fale comigo agora.</p>
+      <a class="btn light" href="https://wa.me/5521996737867?text=Ol%C3%A1%2C%20Cleide!" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#inicio">
+      <svg class="house" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 20 L20 6 L36 20" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 18 V34 H31 V18" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round"/><rect x="16" y="12" width="5" height="5" fill="#e8237a"/><rect x="23" y="12" width="5" height="5" fill="#e8237a"/></svg>
+      <span class="word">Help <em>Cleide</em></span>
+    </a>
+    <span>Niterói e Zona Sul do Rio · (21) 99673-7867</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var wrap = document.getElementById('cal');
+  var hidden = document.getElementById('ag-data');
+  var hoje = new Date();
+  hoje.setHours(0, 0, 0, 0);
+  var ano = hoje.getFullYear();
+  var mes = hoje.getMonth();
+  var sel = null;
+  var meses = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+  var letras = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+  function render() {
+    var primeiro = new Date(ano, mes, 1).getDay();
+    var total = new Date(ano, mes + 1, 0).getDate();
+    var html = '<div class="cal-head"><button type="button" class="cal-nav" data-d="-1" aria-label="Mês anterior">‹</button><strong>' + meses[mes] + ' de ' + ano + '</strong><button type="button" class="cal-nav" data-d="1" aria-label="Próximo mês">›</button></div><div class="cal-grid">';
+    letras.forEach(function (l) { html += '<span class="cal-dow">' + l + '</span>'; });
+    for (var i = 0; i < primeiro; i++) html += '<span></span>';
+    for (var d = 1; d <= total; d++) {
+      var passado = new Date(ano, mes, d) < hoje;
+      var iso = ano + '-' + String(mes + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+      html += '<button type="button" class="cal-day' + (passado ? ' off' : '') + (iso === sel ? ' on' : '') + '" data-iso="' + iso + '"' + (passado ? ' disabled' : '') + '>' + d + '</button>';
+    }
+    html += '</div>';
+    wrap.innerHTML = html;
+  }
+  wrap.addEventListener('click', function (e) {
+    var nav = e.target.closest('.cal-nav');
+    if (nav) {
+      var novo = ano * 12 + mes + parseInt(nav.getAttribute('data-d'), 10);
+      if (novo < hoje.getFullYear() * 12 + hoje.getMonth()) return;
+      ano = Math.floor(novo / 12);
+      mes = novo % 12;
+      render();
+      return;
+    }
+    var dia = e.target.closest('.cal-day');
+    if (dia && !dia.disabled) {
+      sel = dia.getAttribute('data-iso');
+      hidden.value = sel;
+      render();
+    }
+  });
+  render();
+
+  var form = document.getElementById('form-agenda');
+  var link = document.getElementById('wa-envio');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = new FormData(form);
+    var linhas = [];
+    var pedido = f.get('data') ? 'Quero agendar uma faxina.' : 'Quero um orçamento de faxina.';
+    linhas.push('Olá, Cleide! ' + pedido, '');
+    linhas.push('Nome: ' + f.get('nome'));
+    linhas.push('Bairro: ' + f.get('bairro'));
+    linhas.push('Tipo de espaço: ' + f.get('espaco'));
+    linhas.push('Serviço: ' + f.get('servico'));
+    linhas.push('Tamanho: ' + (f.get('tamanho') || 'não informado'));
+    if (f.get('data')) {
+      var p = f.get('data').split('-');
+      linhas.push('Data: ' + p[2] + '/' + p[1] + '/' + p[0]);
+    }
+    linhas.push('Horário: ' + (f.get('hora') || 'qualquer horário'));
+    if (f.get('obs')) linhas.push('Observações: ' + f.get('obs'));
+    link.href = 'https://wa.me/5521996737867?text=' + encodeURIComponent(linhas.join('\n'));
+    link.style.display = 'flex';
+    link.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+})();
+
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var cores = ['#e8237a', '#f7c523', '#2b6cf0', '#ffffff'];
+  function brilho(x, y, n) {
+    for (var i = 0; i < n; i++) {
+      var s = document.createElement('span');
+      var tam = 8 + Math.random() * 12;
+      s.style.cssText = 'position:fixed;left:0;top:0;width:' + tam + 'px;height:' + tam + 'px;pointer-events:none;z-index:9999;background:' + cores[i % cores.length] + ';clip-path:polygon(50% 0%,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0% 50%,38% 38%);';
+      document.body.appendChild(s);
+      var ang = Math.random() * Math.PI * 2;
+      var dist = 30 + Math.random() * 60;
+      var dx = Math.cos(ang) * dist;
+      var dy = Math.sin(ang) * dist;
+      var anim = s.animate([
+        { transform: 'translate(' + x + 'px,' + y + 'px) scale(.2) rotate(0deg)', opacity: 1 },
+        { transform: 'translate(' + (x + dx) + 'px,' + (y + dy) + 'px) scale(1) rotate(180deg)', opacity: 1, offset: .6 },
+        { transform: 'translate(' + (x + dx * 1.3) + 'px,' + (y + dy * 1.3 + 20) + 'px) scale(0) rotate(360deg)', opacity: 0 }
+      ], { duration: 900 + Math.random() * 400, easing: 'ease-out' });
+      anim.onfinish = function () { s.remove(); };
+    }
+  }
+  document.addEventListener('pointerdown', function (e) {
+    if (e.target.closest('input, select, textarea, summary, a, button')) return;
+    brilho(e.clientX, e.clientY, 12);
+  });
+  if (window.matchMedia('(pointer: fine)').matches) {
+    var ultimo = 0;
+    document.addEventListener('pointermove', function (e) {
+      var agora = Date.now();
+      if (agora - ultimo < 70) return;
+      ultimo = agora;
+      brilho(e.clientX, e.clientY, 1);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
